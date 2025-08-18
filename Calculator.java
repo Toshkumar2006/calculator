@@ -1,3 +1,6 @@
+    git rm <filename>
+
+
 package calculator;
 
 import java.awt.EventQueue;
