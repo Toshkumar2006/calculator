@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Web Calculator</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="calculator">
+        <div class="display" id="display">0</div>
+        <div class="buttons">
+            <button class="clear">AC</button>
+            <button class="operator">/</button>
+            <button class="operator">*</button>
+            <button class="operator">-</button>
+            <button>7</button>
+            <button>8</button>
+            <button>9</button>
+            <button class="operator">+</button>
+            <button>4</button>
+            <button>5</button>
+            <button>6</button>
+            <button class="equal">=</button>
+            <button>1</button>
+            <button>2</button>
+            <button>3</button>
+            <button>0</button>
+            <button>.</button>
+        </div>
+    </div>
+
+    <script>
+        const display = document.getElementById('display');
+        let currentInput = '';
+        let operator = '';
+        let firstOperand = null;
+
+        document.querySelectorAll('.buttons button').forEach(button => {
+            button.addEventListener('click', () => {
+                const value = button.textContent;
+
+                if (value === 'AC') {
+                    currentInput = '';
+                    firstOperand = null;
+                    operator = '';
+                    display.textContent = '0';
+                } else if (value === '=') {
+                    if (firstOperand !== null && operator && currentInput !== '') {
+                        currentInput = String(eval(`${firstOperand} ${operator} ${currentInput}`));
+                        display.textContent = currentInput;
+                        firstOperand = null;
+                        operator = '';
+                    }
+                } else if (['+', '-', '*', '/'].includes(value)) {
+                    if (firstOperand === null) {
+                        firstOperand = parseFloat(currentInput);
+                    } else if (operator) {
+                        firstOperand = eval(`${firstOperand} ${operator} ${currentInput}`);
+                    }
+                    operator = value;
+                    currentInput = '';
+                } else {
+                    currentInput += value;
+                    display.textContent = currentInput;
+                }
+            });
+        });
+    </script>
+</body>
+</html>
