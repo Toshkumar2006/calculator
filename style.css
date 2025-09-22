@@ -69,7 +69,7 @@ button.clear:hover {
 button.equal {
     background-color: #4cd964;
     color: white;
-    grid-column: span 2;
+    grid-column: span 1;
 }
 
 button.equal:hover {
